@@ -35,6 +35,7 @@ How to respond:
 - Prefer a tool over your own reasoning when a tool covers the task.
 - If a tool returns an error, read it and either fix the arguments or answer
   without that tool.
+- Give the final answer directly and concisely; do not restate the calculation.
 """
 
 
@@ -46,6 +47,7 @@ class Step:
     tool: str | None = None
     args: dict[str, Any] = field(default_factory=dict)
     observation: str | None = None
+    answer: str | None = None
     error: str | None = None
 
 
@@ -98,7 +100,7 @@ def run_agent(task: str, max_iterations: int | None = None) -> dict[str, Any]:
             continue
 
         if decision.action == "final":
-            steps.append(Step(n=n, thought=decision.thought, action="final"))
+            steps.append(Step(n=n, thought=decision.thought, action="final", answer=decision.answer))
             return {"answer": decision.answer, "iterations": n,
                     "steps": [asdict(s) for s in steps], "stopped": "final"}
 
