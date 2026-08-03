@@ -6,8 +6,9 @@ import json
 
 from tools.base import Tool
 from tools.calculator import calculator
+from tools.knowledge_base import knowledge_base
 
-TOOLS: dict[str, Tool] = {t.name: t for t in (calculator,)}
+TOOLS: dict[str, Tool] = {t.name: t for t in (calculator, knowledge_base)}
 
 
 def get_tool(name: str) -> Tool | None:
