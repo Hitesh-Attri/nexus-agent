@@ -36,6 +36,9 @@ How to respond:
 - If a tool returns an error, read it and either fix the arguments or answer
   without that tool.
 - Give the final answer directly and concisely; do not restate the calculation.
+- Respond with a single JSON object matching the required response schema, and
+  nothing else. Do not emit a native function call or tool-call message: the
+  tools above are executed by the caller from your JSON decision, not by the API.
 """
 
 
